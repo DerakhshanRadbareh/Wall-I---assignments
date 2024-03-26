@@ -1,0 +1,21 @@
+int ledRed = 11;
+int brightness = 0;
+int fadeAmount = 5; // Change in brightness per iteration
+
+void setup() {
+  pinMode(ledRed, OUTPUT);
+}
+
+void loop() {
+  // Fade in
+  for (brightness = 0; brightness <= 255; brightness += fadeAmount) {
+    analogWrite(ledRed, brightness);
+    delay(30); // Adjust the delay for smoother fading
+  }
+
+  // Fade out
+  for (brightness = 255; brightness >= 0; brightness -= fadeAmount) {
+    analogWrite(ledRed, brightness);
+    delay(30); // Adjust the delay for smoother fading
+  }
+}
