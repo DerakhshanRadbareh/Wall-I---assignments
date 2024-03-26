@@ -1,0 +1,42 @@
+int ledRed = 11;
+int ledYellow = 12;
+int ledGreen = 13;
+int buttonPin = 2;
+bool trafficLightActive = false;
+
+void setup() {
+  pinMode(ledRed, OUTPUT);
+  pinMode(ledYellow, OUTPUT);
+  pinMode(ledGreen, OUTPUT);
+  pinMode(buttonPin, INPUT_PULLUP); // Using INPUT_PULLUP to enable internal pull-up resistor
+}
+
+void loop() {
+  if (digitalRead(buttonPin) == LOW) { // Check if button is pressed (LOW)
+    if (!trafficLightActive) { // Check if traffic light is not already active
+      trafficLightActive = true;
+      activateTrafficLight();
+    }
+  } else {
+    if (trafficLightActive) { // Check if traffic light is active
+      trafficLightActive = false;
+      // Turn off all LEDs
+      digitalWrite(ledRed, LOW);
+      digitalWrite(ledYellow, LOW);
+      digitalWrite(ledGreen, LOW);
+    }
+  }
+}
+
+void activateTrafficLight() {
+  digitalWrite(ledRed, LOW); // Turn on red LED (LOW)
+  digitalWrite(ledYellow, HIGH); // Turn off yellow LED (HIGH)
+  digitalWrite(ledGreen, HIGH); // Turn off green LED (HIGH)
+  delay(3000); // Red light
+  digitalWrite(ledYellow, LOW); // Turn on yellow LED (LOW)
+  delay(1000); // Yellow light
+  digitalWrite(ledGreen, LOW); // Turn on green LED (LOW)
+  delay(3000); // Green light
+  digitalWrite(ledYellow, HIGH); // Turn off yellow LED (HIGH)
+  delay(1000); // Yellow light
+}
